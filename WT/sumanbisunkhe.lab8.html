@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS Arrays & Built-in Objects</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+    h2 { color: #333; }
+    button {
+      margin: 5px;
+      padding: 10px 15px;
+      border: none;
+      background: #0040ffec;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #demo, #message {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+    img {
+      margin: 10px 0;
+      width: 200px;
+      height: 100px;
+      border-radius: 10px;
+    }
+    .dynamic-p { color: #666; }
+    #main-heading{
+        font-size: 24px;
+        color: #333;
+        font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>JavaScript Arrays and Built-in Objects</h2>
+  <p id="message"></p>
+
+  <!-- Window Object Controls -->
+  <div class="control-group">
+    <button onclick="showAlert()">Show Alert</button>
+    <button onclick="showPrompt()">Show Prompt</button>
+    <button onclick="showConfirm()">Show Confirm</button>
+    <button onclick="showUrl()">Show URL</button>
+    <button onclick="navigateToGoogle()">Go to Google</button>
+  </div>
+
+  <!-- Time & Date Controls -->
+  <div class="control-group">
+    <button onclick="showCurrentDate()">Show Date</button>
+    <button onclick="showCurrentTime()">Show Time</button>
+    <button onclick="startCountdown()">Start Countdown</button>
+    <button onclick="stopCountdown()">Stop Countdown</button>
+    <button onclick="startCounter()">Start Counter</button>
+    <button onclick="stopCounter()">Stop Counter</button>
+  </div>
+
+  <!-- DOM Manipulation Controls -->
+  <div class="control-group">
+    <img id="myImage" src="/media/Chitwan Jungle Safari.jpg" alt="Sample Image">
+    <p id="main-heading">Document Object Model</p>
+    <p id="demo">Initial paragraph text.</p>
+
+    <button onclick="changeText()">Change Text</button>
+    <button onclick="swapImage()">Swap Image</button>
+    <button onclick="enhanceStyle()">Enhance Style</button>
+    <button onclick="updateColor()">Update Color</button>
+    <button onclick="modifyFont()">Modify Font</button>
+    <button onclick="addParagraph()">Add Paragraph</button>
+    <button onclick="removeParagraph()">Remove Paragraph</button>
+    <button id="eventButton">Event Button</button>
+  </div>
+
+  <script>
+    // Global elements
+    const message = document.getElementById('message');
+    const demo = document.getElementById('demo');
+    const myImage = document.getElementById('myImage');
+
+    // Timer variables
+    let countdownTimer;
+    let counterTimer;
+
+    // Window Object Functions
+    function showAlert() { alert('Welcome to JavaScript!'); }
+    
+    function showPrompt() {
+      const userName = prompt('Please enter your name:');
+      if (userName) message.textContent = `Hello, ${userName}!`;
+    }
+
+    function showConfirm() {
+      const result = confirm('Do you want to continue?');
+      message.textContent = result ? 'Action confirmed!' : 'Action canceled!';
+    }
+
+    function showUrl() {
+      message.textContent = `Current URL: ${location.href}`;
+    }
+
+    function navigateToGoogle() {
+      window.open('https://www.google.com', '_blank');
+    }
+
+    // Time & Date Functions
+    function showCurrentDate() {
+      message.textContent = new Date().toLocaleDateString();
+    }
+
+    function showCurrentTime() {
+      message.textContent = new Date().toLocaleTimeString();
+    }
+
+    function startCountdown() {
+      clearInterval(countdownTimer);
+      let count = 10;
+      countdownTimer = setInterval(() => {
+        message.textContent = `Countdown: ${count--}`;
+        if (count < 0) {
+          clearInterval(countdownTimer);
+          message.textContent = 'Countdown complete!';
+        }
+      }, 1000);
+    }
+
+    function stopCountdown() {
+      clearInterval(countdownTimer);
+      message.textContent = 'Countdown stopped!';
+    }
+
+    function startCounter() {
+      clearInterval(counterTimer);
+      let count = 0;
+      counterTimer = setInterval(() => {
+        message.textContent = `Counter: ${count++}`;
+      }, 1000);
+    }
+
+    function stopCounter() {
+      clearInterval(counterTimer);
+      message.textContent = 'Counter stopped!';
+    }
+
+    // DOM Manipulation Functions
+    function changeText() {
+      demo.textContent = 'Text updated successfully!';
+    }
+
+    function swapImage() {
+      myImage.src = '/media//Annapurna Circuit Expedition.jpg';
+    }
+
+    function enhanceStyle() {
+      demo.style.fontSize = '24px';
+      demo.style.color = '#e74c3c';
+      demo.style.fontWeight = 'bold';
+    }
+
+    function updateColor() {
+      demo.style.color = '#3498db';
+    }
+
+    function modifyFont() {
+      demo.style.fontFamily = 'Courier New, monospace';
+    }
+
+    function addParagraph() {
+      const newPara = document.createElement('p');
+      newPara.textContent = `New paragraph added at ${new Date().toLocaleTimeString()}`;
+      newPara.classList.add('dynamic-p');
+      document.body.appendChild(newPara);
+    }
+
+    function removeParagraph() {
+      const dynamicParas = document.querySelectorAll('.dynamic-p');
+      if (dynamicParas.length > 0) {
+        dynamicParas[dynamicParas.length - 1].remove();
+      }
+    }
+
+    // Event Listeners
+    document.getElementById('eventButton').addEventListener('click', () => {
+      alert('Event handled successfully!');
+    });
+
+    // Demonstration of array methods
+    const fruits = ['Apple', 'Banana', 'Mango'];
+    console.log('Original array:', fruits);
+    
+    fruits.push('Orange');
+    console.log('After push:', fruits);
+    
+    fruits.pop();
+    console.log('After pop:', fruits);
+    
+    console.log('Array iteration:');
+    fruits.forEach((fruit, index) => console.log(`${index + 1}. ${fruit}`));
+  </script>
+
+</body>
+</html>

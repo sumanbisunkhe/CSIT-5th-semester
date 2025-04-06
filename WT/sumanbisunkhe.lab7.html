@@ -1,0 +1,482 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Basics</title>
+</head>
+
+<body>
+    <script>
+
+        //Identifiers are names given to variables, functions, classes, etc. in JavaScript.
+        //Identifiers are case-sensitive and can contain Unicode letters, $, _, and digits (0-9), but may not start with a digit.
+
+        // Declaring a variable
+        var x = 10;
+        let y = 20;
+        const z = x + y;
+        console.log("The value of z is: " + z);
+
+
+        //Data Types
+        //JavaScript is a loosely typed or dynamic language. This means you don't have to declare the type of a variable ahead of time.
+        //The data type of a variable can change during the execution of a program and JavaScript takes care of it automatically.
+        //There are 8 basic data types in JavaScript.
+        /*
+        1. Number
+        2. String
+        3. Boolean
+        4. Object
+        5. Array
+        6. Null
+        7. Undefined
+        8. Symbol
+        */
+
+        //1. Number
+        var num1 = 10;
+        var num2 = 20.5;
+        var num3 = 10e-3;
+        var num4 = 10e3;
+
+        console.log("num1: " + num1);
+        console.log("num2: " + num2);
+        console.log("num3: " + num3);
+        console.log("num4: " + num4);
+
+        //2. String
+        var str1 = "Hello";
+        var str2 = 'World';
+
+        //string concatenation
+        var str3 = str1 + " " + str2;
+        console.log("String Concatination str3: " + str3);
+
+        //string length
+        console.log("String Length: " + str3.length);
+
+        //string index
+        console.log("String Index: " + str3[0]);
+
+        //3. Boolean
+        var bool1 = true;
+        var bool2 = false;
+
+        //boolean comparison
+        console.log("Boolean Comparison: " + (10 > 5));
+
+
+        //boolean logical operators
+        console.log("Boolean Logical Operators: " + (10 > 5 && 5 > 2));
+
+
+        //4. Object
+        var person = {
+            firstName: "Suman",
+            lastName: "Bisunkhe",
+            age: 21,
+            eyeColor: "blue"
+        };
+        console.log("Object: " + person.firstName + " " + person.lastName + " " + person.age + " " + person.eyeColor);
+        console.log(person);
+
+
+        //5. Array
+        var cars = [" ", "Tesla", "Saab", "Volvo", "BMW"];
+        console.log("Array: " + cars[0] + " " + cars[1] + " " + cars[2] + " " + cars[3] + " " + cars[4]);
+
+        //Array length
+        console.log("Array Length: " + cars.length);
+
+        //Array index
+        console.log("Array Index: " + cars[2]);
+
+        //Array loop
+        for (var i = 0; i < cars.length; i++) {
+            console.log("Array Loop: " + cars[i]);
+        }
+
+        //6. Null
+        var nullVar = null;
+        console.log("Null: " + nullVar);
+
+        //7. Undefined
+        var undefinedVar;
+        console.log("Undefined: " + undefinedVar);
+
+
+        //8. Symbol
+        var sym1 = Symbol('foo');
+        var sym2 = Symbol('foo');
+        console.log(sym1);
+        console.log(sym2);
+        console.log(sym1 == sym2);
+
+        //Typeof Operator
+        console.log("Typeof Operator: " + typeof num1);
+        console.log("Typeof Operator: " + typeof str1);
+        console.log("Typeof Operator: " + typeof bool1);
+        console.log("Typeof Operator: " + typeof person);
+        console.log("Typeof Operator: " + typeof cars);
+        console.log("Typeof Operator: " + typeof nullVar);
+        console.log("Typeof Operator: " + typeof undefinedVar);
+        console.log("Typeof Operator: " + typeof sym1);
+
+
+        //Type Conversion
+        //JavaScript is a dynamically typed language. This means that a JavaScript variable can hold a value of any data type.
+        //JavaScript automatically converts variables to the correct data type when performing operations.
+        //There are mainly two types of data type conversion in JavaScript:
+        //1. Implicit Type Conversion
+        //2. Explicit Type Conversion
+
+        //1. Implicit Type Conversion
+        //JavaScript automatically converts one data type to another when needed.
+        //For example, a string can be converted to a number and vice versa.
+        var num5 = 10;
+        var str4 = "20";
+        var sum = num5 + str4;
+        console.log("Implicit Type Conversion: " + sum);
+
+
+        //2. Explicit Type Conversion
+        //You can convert one data type to another using the built-in JavaScript functions.
+        //There are mainly three types of explicit type conversion in JavaScript:
+        //1. Number() function
+        //2. String() function
+        //3. Boolean() function
+
+        //1. Number() function
+        var str5 = "10";
+        var num6 = Number(str5);
+        console.log("Number() function: " + num6);
+
+        //2. String() function
+        var num7 = 20;
+        var str6 = String(num7);
+        console.log("String() function: " + str6);
+
+        //3. Boolean() function
+        var bool3 = Boolean(1);
+        console.log("Boolean() function: " + bool3);
+
+        //JavaScript Operators
+        //Operators are used to perform operations on variables and values.
+        //JavaScript has the following types of operators:
+        //1. Arithmetic Operators
+        //2. Assignment Operators
+        //3. Comparison Operators
+        //4. Logical Operators
+        //5. Bitwise Operators
+        //6. String Operators
+        //7. Conditional (Ternary) Operator
+
+        //1. Arithmetic Operators
+        var a = 10;
+        var b = 20;
+        console.log("Arithmetic Operators: " + (a + b));
+        console.log("Arithmetic Operators: " + (a - b));
+        console.log("Arithmetic Operators: " + (a * b));
+        console.log("Arithmetic Operators: " + (a / b));
+        console.log("Arithmetic Operators: " + (a % b));
+        console.log("Arithmetic Operators: " + (a ** b));  //Exponentiation
+
+        //2. Assignment Operators
+        var c = 10;
+        c += 5;
+        console.log("Assignment Operators: " + c);
+
+        //3. Comparison Operators
+        console.log("Comparison Operators: " + (a == b));
+        console.log("Comparison Operators: " + (a != b));
+        console.log("Comparison Operators: " + (a > b));
+        console.log("Comparison Operators: " + (a < b));
+
+        //4. Logical Operators
+        console.log("Logical Operators: " + (a > 5 && b > 10));
+        console.log("Logical Operators: " + (a > 5 || b > 10));
+        console.log("Logical Operators: " + !(a > 5));
+
+        //5. Bitwise Operators
+        console.log("Bitwise Operators: " + (a & b));
+        console.log("Bitwise Operators: " + (a | b));
+        console.log("Bitwise Operators: " + (a ^ b));
+        console.log("Bitwise Operators: " + (~a));
+        console.log("Bitwise Operators: " + (a << 1));
+        console.log("Bitwise Operators: " + (a >> 1));
+        console.log("Bitwise Operators: " + (a >>> 1));
+
+        //6. String Operators
+        var str7 = "Hello";
+        var str8 = "World";
+        console.log("String Operators: " + str7 + " " + str8);
+
+
+        //7. Conditional (Ternary) Operator
+        var age = 20;
+        var voteable = (age < 18) ? "Too young" : "Old enough";
+        console.log("Conditional (Ternary) Operator: " + voteable);
+
+        //ternary operator with multiple conditions
+        var age1 = 20;
+        var voteable1 = (age1 < 18) ? "Too young" : (age1 > 18) ? "Old enough" : "Exactly 18";
+        console.log("Conditional (Ternary) Operator: " + voteable1);
+
+
+        //switch case
+        var day = 7;
+        switch (day) {
+            case 0:
+                console.log("Sunday");
+                break;
+            case 1:
+                console.log("Monday");
+                break;
+            case 2:
+                console.log("Tuesday");
+                break;
+            case 3:
+                console.log("Wednesday");
+                break;
+            case 4:
+                console.log("Thursday");
+                break;
+            case 5:
+                console.log("Friday");
+                break;
+            case 6:
+                console.log("Saturday");
+                break;
+            default:
+                console.log("Unknown Day");
+        }
+
+        //JavaScript Loops
+        //Loops are used to execute the same block of code again and again, as long as a certain condition is true.
+        //In JavaScript, we have the following types of loops:
+        //1. for loop
+        //2. while loop
+        //3. do while loop
+        //4. for in loop
+        //5. for of loop
+
+        //1. for loop
+        for (var i = 0; i < 5; i++) {
+            console.log("For Loop: " + i);
+        }
+
+        //2. while loop
+        var j = 0;
+        while (j < 5) {
+            console.log("While Loop: " + j);
+            j++;
+        }
+
+        //3. do while loop
+        var k = 0;
+        do {
+            console.log("Do While Loop: " + k);
+            k++;
+        } while (k < 5);
+
+        //4. for in loop
+        var person1 = {
+            firstName: "Suman",
+            lastName: "Bisunkhe",
+            age: 25
+        };
+        var text = "";
+        var x;
+        for (x in person1) {
+            text += person1[x] + " ";
+        }
+
+        console.log("For In Loop: " + text);
+
+        //5. for of loop
+        var cars1 = ["BMW", "Volvo", "Mini"];
+        var x;
+        for (x of cars1) {
+            console.log("For Of Loop: " + x);
+        }
+
+        //for each loop
+        const fruits = ["apple", "orange", "cherry"];
+        fruits.forEach((fruit) => {
+            console.log("For Each Loop: " + fruit);
+        });
+
+
+        //popup boxes
+        //1. alert box
+        alert("This is an alert box");
+
+        //2. confirm box
+        var result = confirm("Do you really want to leave this page?");
+        if (result == true) {
+            console.log("User pressed OK");
+        } else {
+            console.log("User pressed Cancel");
+        }
+
+        //3. prompt box
+        var name = prompt("What is your name?", "Suman Bisunkhe");
+        console.log("User Name: " + name);
+
+
+        //constructor
+        function Person(firstName, age, eyeColor) {
+            this.firstName = firstName;
+            this.age = age;
+            this.eyeColor = eyeColor;
+        }
+
+        var myFather = new Person("Rabindra", 50, "blue");
+        var myMother = new Person("Sunita", 48, "green");
+
+        console.log("Constructor: " + myFather.firstName + " " + myFather.age + " " + myFather.eyeColor);
+        console.log("Constructor: " + myMother.firstName + " " + myMother.age + " " + myMother.eyeColor);
+    </script>
+
+
+</body>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Javascript Basics</title>
+</head>
+<body>
+  <script>
+    // Basic arithmetic with variables
+    var x = 10, y = 20, z = x + y;
+    console.log("The value of z is: " + z);
+
+    // Number data type examples and logging
+    var num1 = 10, num2 = 20.5, num3 = 10e-3, num4 = 10e3;
+    console.log("num1: " + num1, "num2: " + num2, "num3: " + num3, "num4: " + num4);
+
+    // String operations: concatenation, length, and indexing
+    var str1 = "Hello", str2 = "World", str3 = str1 + " " + str2;
+    console.log("String Concatenation: " + str3, "Length: " + str3.length, "Index: " + str3[0]);
+
+    // Boolean values and comparisons
+    var bool1 = true, bool2 = false;
+    console.log("Boolean Comparison: " + (10 > 5), "Logical: " + (10 > 5 && 5 > 2));
+
+    // Creating and logging an object
+    var person = {firstName: "Suman", lastName: "Bisunkhe", age: 50, eyeColor: "blue"};
+    console.log("Object: " + person.firstName + " " + person.lastName + " " + person.age + " " + person.eyeColor, person);
+
+    // Array creation, joining elements, and iteration
+    var cars = [" ", "Tesla", "Saab", "Volvo", "BMW"];
+    console.log("Array: " + cars.join(" "), "Length: " + cars.length, "Index 2: " + cars[2]);
+    for (var i = 0; i < cars.length; i++) console.log("Array Loop: " + cars[i]);
+
+    // Demonstrating null and undefined types
+    var nullVar = null, undefinedVar;
+    console.log("Null: " + nullVar, "Undefined: " + undefinedVar);
+
+    // Working with Symbols
+    var sym1 = Symbol('foo'), sym2 = Symbol('foo');
+    console.log(sym1, sym2, sym1 == sym2);
+
+    // Checking data types using typeof operator
+    console.log("Typeof num1: " + typeof num1, "str1: " + typeof str1, "bool1: " + typeof bool1,
+                "person: " + typeof person, "cars: " + typeof cars, "nullVar: " + typeof nullVar,
+                "undefinedVar: " + typeof undefinedVar, "sym1: " + typeof sym1);
+
+    // Implicit type conversion: number and string
+    var num5 = 10, str4 = "20", sum = num5 + str4;
+    console.log("Implicit Conversion: " + sum);
+
+    // Explicit type conversion: Number(), String(), Boolean()
+    var str5 = "10", num6 = Number(str5);
+    console.log("Number() conversion: " + num6);
+    var num7 = 20, str6 = String(num7);
+    console.log("String() conversion: " + str6);
+    var bool3 = Boolean(1);
+    console.log("Boolean() conversion: " + bool3);
+
+    // Arithmetic operations examples
+    var a = 10, b = 20;
+    console.log("Arithmetic: " + (a + b), (a - b), (a * b), (a / b), (a % b), (a ** b));
+
+    // Assignment operator example
+    var c = 10; c += 5;
+    console.log("Assignment: " + c);
+
+    // Comparison and logical operators demonstration
+    console.log("Comparison: " + (a == b), (a != b), (a > b), (a < b));
+    console.log("Logical: " + (a > 5 && b > 10), (a > 5 || b > 10), !(a > 5));
+
+    // Bitwise operators examples
+    console.log("Bitwise: " + (a & b), (a | b), (a ^ b), (~a), (a << 1), (a >> 1), (a >>> 1));
+
+    // String concatenation using operators
+    var str7 = "Hello", str8 = "World";
+    console.log("String Operators: " + str7 + " " + str8);
+
+    // Conditional (ternary) operator usage
+    var age = 20, voteable = (age < 18) ? "Too young" : "Old enough";
+    console.log("Ternary: " + voteable);
+    var age1 = 20, voteable1 = (age1 < 18) ? "Too young" : (age1 > 18) ? "Old enough" : "Exactly 18";
+    console.log("Ternary: " + voteable1);
+
+    // Switch-case for selecting day names based on a number
+    var day = 7;
+    switch (day) {
+      case 0: console.log("Sunday"); break;
+      case 1: console.log("Monday"); break;
+      case 2: console.log("Tuesday"); break;
+      case 3: console.log("Wednesday"); break;
+      case 4: console.log("Thursday"); break;
+      case 5: console.log("Friday"); break;
+      case 6: console.log("Saturday"); break;
+      default: console.log("Unknown Day");
+    }
+
+    // Different loop structures: for, while, and do-while
+    for (var i = 0; i < 5; i++) console.log("For Loop: " + i);
+    var j = 0; 
+    while (j < 5) { console.log("While Loop: " + j); j++; }
+    var k = 0; 
+    do { console.log("Do While Loop: " + k); k++; } while (k < 5);
+
+    // For-in loop to iterate over object properties
+    var person1 = {firstName: "Suman", lastName: "Bisunkhe", age: 25}, text = "";
+    for (var x in person1) text += person1[x] + " ";
+    console.log("For In Loop: " + text);
+
+    // For-of loop and forEach loop to iterate over arrays
+    var cars1 = ["BMW", "Volvo", "Mini"];
+    for (let x of cars1) console.log("For Of Loop: " + x);
+    ["apple", "orange", "cherry"].forEach(fruit => console.log("For Each Loop: " + fruit));
+
+    // Popup boxes: alert, confirm, and prompt
+    alert("This is an alert box");
+    var result = confirm("Do you really want to leave this page?");
+    console.log("User pressed " + (result ? "OK" : "Cancel"));
+    var name = prompt("What is your name?", "Suman Bisunkhe");
+    console.log("User Name: " + name);
+
+    // Constructor function for creating Person objects
+    function Person(firstName, age, eyeColor) {
+      this.firstName = firstName;
+      this.age = age;
+      this.eyeColor = eyeColor;
+    }
+    var myFather = new Person("Rabindra", 50, "blue"),
+        myMother = new Person("Sunita", 48, "green");
+    console.log("Constructor: " + myFather.firstName + " " + myFather.age + " " + myFather.eyeColor);
+    console.log("Constructor: " + myMother.firstName + " " + myMother.age + " " + myMother.eyeColor);
+  </script>
+</body>
+</html>

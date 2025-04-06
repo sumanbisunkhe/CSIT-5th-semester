@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="lab5style.css">
+    <title>Advanced CSS Lab </title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Advanced CSS and Responsive Web Design</h1>
+
+        <section>
+            <h2>1. Positioning Demo</h2>
+            <div class="positioning-demo">
+                <div class="relative-box">Relative Positioning</div>
+                <div class="absolute-box">Absolute Positioning</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>2. Float Layout Demo</h2>
+            <div class="float-container">
+                <div class="float-box">Float Box 1</div>
+                <div class="float-box">Float Box 2</div>
+                <div class="float-box">Float Box 3</div>
+                <div class="clear-box">Cleared Box</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>3. CSS3 Features Demo</h2>
+            <div class="css3-demo">
+                <div class="shadow-box">Box with Shadow</div>
+                <div class="text-effect">Text with Shadow Effect</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>4. Responsive Design Demo</h2>
+            <p>Resize the window to see the layout change:</p>
+            <ul>
+                <li>Large screens (>768px): 4 boxes in one row</li>
+                <li>Medium screens (481px-768px): 2 boxes per row</li>
+                <li>Small screens (≤480px): 1 box per row</li>
+            </ul>
+            <div class="box-container">
+                <div class="fixed-box">
+                    <h3>Box 1</h3>
+                    <p>Content for box 1</p>
+                </div>
+                <div class="fixed-box">
+                    <h3>Box 2</h3>
+                    <p>Content for box 2</p>
+                </div>
+                <div class="fixed-box">
+                    <h3>Box 3</h3>
+                    <p>Content for box 3</p>
+                </div>
+                <div class="fixed-box">
+                    <h3>Box 4</h3>
+                    <p>Content for box 4</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="screen-size-indicator">
+        <p>Current view: <span id="screen-size">Large Screen</span></p>
+    </div>
+
+    <script>
+        function updateScreenSize() {
+            const indicator = document.getElementById('screen-size');
+            if (window.innerWidth > 768) {
+                indicator.textContent = 'Large Screen';
+            } else if (window.innerWidth > 480) {
+                indicator.textContent = 'Medium Screen';
+            } else {
+                indicator.textContent = 'Small Screen';
+            }
+        }
+        window.addEventListener('resize', updateScreenSize);
+        updateScreenSize();
+    </script>
+</body>
+
+</html>

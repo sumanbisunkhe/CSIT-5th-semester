@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookies and Error Handling</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            padding: 20px;
+            color: #333;
+        }
+
+        h3 {
+            margin-bottom: 10px;
+        }
+
+        input {
+            padding: 8px;
+            margin: 10px 0;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 8px 12px;
+            margin: 5px 2px;
+            border: none;
+            background: #007bff;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        #errorMessage {
+            color: red;
+            margin-top: 10px;
+        }
+
+        #cookieData ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #cookieData li {
+            background: #e9ecef;
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Cookies in JavaScript</h3>
+    <label for="username">Username</label>
+    <input type="text" id="username" placeholder="Enter your name" />
+    <div id="errorMessage"></div>
+    <div>
+        <button id="saveBtn">Save Cookie</button>
+        <button id="showBtn">Show Cookie</button>
+        <button id="deleteBtn">Delete Cookie</button>
+    </div>
+    <div id="cookieData"></div>
+
+    <script>
+        const errorMessage = document.getElementById('errorMessage');
+        const cookieData = document.getElementById('cookieData');
+
+        const clearError = () => { errorMessage.textContent = ''; };
+
+        const saveCookie = () => {
+            clearError();
+            const username = document.getElementById('username').value.trim();
+            if (!username) {
+                return errorMessage.textContent = 'Username cannot be empty';
+            }
+            try {
+                document.cookie = `username=${encodeURIComponent(username)}; path=/; max-age=3600`;
+                alert('Cookie saved successfully!');
+            } catch (e) {
+                errorMessage.textContent = e.message;
+            }
+        };
+
+        const showCookie = () => {
+            clearError();
+            try {
+                const cookie = document.cookie
+                    .split(';')
+                    .map(c => c.trim())
+                    .find(c => c.startsWith('username='));
+                if (cookie) {
+                    const value = decodeURIComponent(cookie.split('=')[1]);
+                    alert('Cookie value: ' + value);
+                } else {
+                    throw new Error('Cookie not found');
+                }
+            } catch (e) {
+                errorMessage.textContent = e.message;
+            }
+        };
+
+        const deleteCookie = () => {
+            clearError();
+            try {
+                document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                alert('Cookie deleted successfully!');
+            } catch (e) {
+                errorMessage.textContent = e.message;
+            }
+        };
+
+        
+
+        // Attach event listeners
+        document.getElementById('saveBtn').addEventListener('click', saveCookie);
+        document.getElementById('showBtn').addEventListener('click', showCookie);
+        document.getElementById('deleteBtn').addEventListener('click', deleteCookie);
+        document.getElementById('getAllBtn').addEventListener('click', getAllCookie);
+        document.getElementById('clearAllBtn').addEventListener('click', clearAllCookies);
+    </script>
+</body>
+
+</html>

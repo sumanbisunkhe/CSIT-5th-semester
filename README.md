@@ -18,6 +18,7 @@ Whether you're revising key concepts or exploring new techniques, this repositor
 
 ## 🎯 Subjects Covered
 - **Design and Analysis of Algorithms**
+- **Web Technology**
 
 
 

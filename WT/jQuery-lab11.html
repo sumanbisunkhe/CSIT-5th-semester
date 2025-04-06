@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>jQuery Demo with Validation and Login</title>
+
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f4f9;
+      text-align: center;
+      padding: 50px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #333;
+      transition: color 0.3s ease;
+    }
+
+    .hidden-paragraph {
+      font-size: 1.2em;
+      margin: 20px 0;
+      color: #555;
+      display: none;
+    }
+
+    button {
+      background-color: #007BFF;
+      border: none;
+      padding: 12px 20px;
+      margin: 10px;
+      color: #fff;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    input {
+      margin-top: 20px;
+      padding: 10px;
+      width: 80%;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .note {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .keypress-output {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #222;
+    }
+
+    .keypress-message {
+      margin-top: 10px;
+      color: green;
+      font-style: italic;
+      display: none;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .success {
+      color: green;
+      font-size: 16px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    /* Login Form Specific Styles */
+    .login-container {
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      text-align: left;
+    }
+
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #444;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+      margin-top: 5px;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #ff5805f1;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .login-btn:hover {
+      background-color: #218838;
+    }
+
+    .login-error {
+      color: #dc3545;
+      margin-top: 15px;
+      text-align: center;
+      display: none;
+    }
+
+    .login-success {
+      color: #28a745;
+      margin-top: 15px;
+      text-align: center;
+      display: none;
+    }
+
+    .status-message {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .window-event-log {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      max-height: 100px;
+      overflow-y: auto;
+      font-size: 14px;
+    }
+
+    .separator {
+      margin: 30px 0;
+      border-top: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>jQuery Interactive Demo</h1>
+
+    <p class="hidden-paragraph">This is a hidden paragraph. Click "Toggle Paragraph" to see me!</p>
+
+    <button id="toggleParagraph">Toggle Paragraph</button>
+    <button id="changeColor">Change Heading Color</button>
+    <button id="reset">Reset</button>
+
+    <form id="nameForm" autocomplete="off">
+      <input type="text" id="username" placeholder="Enter your name" />
+      <div class="error" id="errorText">Please enter a valid name (only letters).</div>
+      <div class="success" id="successText">Form submitted successfully!</div>
+    </form>
+
+    <div class="keypress-output">Keypress Count: <span id="keyCount">0</span></div>
+    <div class="note">Note: Typing in the box triggers a keypress event.</div>
+    <div class="keypress-message">A key was pressed!</div>
+
+    <div class="separator"></div>
+
+    <!-- Login Form Section -->
+    <div class="login-container">
+      <h2>User Login</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter your email">
+          <div class="error" id="emailError">Please enter a valid email address.</div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="Enter your password">
+          <div class="error" id="passwordError">Password must be at least 6 characters.</div>
+        </div>
+        <button type="submit" class="login-btn">Login</button>
+        <div class="login-error" id="loginError">Invalid email or password. Please try again.</div>
+        <div class="login-success" id="loginSuccess">Login successful! Redirecting...</div>
+      </form>
+    </div>
+
+    <!-- Window Events Log -->
+    <div class="window-event-log" id="eventLog">
+      <strong>Window Events Log:</strong>
+      <div id="eventMessages"></div>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      let keypressCount = 0;
+
+      // Toggle paragraph visibility
+      $('#toggleParagraph').click(function () {
+        $('.hidden-paragraph').slideToggle(400);
+      });
+
+      // Change heading color
+      $('#changeColor').click(function () {
+        $('h1').css('color', 'crimson');
+      });
+
+      // Reset everything
+      $('#reset').click(function () {
+        $('.hidden-paragraph').slideUp(400);
+        $('h1').css('color', '#333');
+        $('#username').val('');
+        keypressCount = 0;
+        $('#keyCount').text(keypressCount);
+        $('.keypress-message').hide();
+        $('#errorText').hide();
+        $('#successText').hide();
+        
+        // Reset login form
+        $('#loginForm')[0].reset();
+        $('#emailError').hide();
+        $('#passwordError').hide();
+        $('#loginError').hide();
+        $('#loginSuccess').hide();
+      });
+
+      // Keypress counter and message
+      $('#username').keypress(function () {
+        keypressCount++;
+        $('#keyCount').text(keypressCount);
+        $('.keypress-message').fadeIn(200).delay(500).fadeOut(200);
+      });
+
+      // Form validation
+      $('#nameForm').on('submit', function (e) {
+        e.preventDefault();
+        const name = $('#username').val().trim();
+        const isValid = /^[A-Za-z\s]+$/.test(name);
+
+        if (!name || !isValid) {
+          $('#errorText').show();
+          $('#successText').hide();
+        } else {
+          $('#errorText').hide();
+          $('#successText').fadeIn(300).delay(1500).fadeOut(300);
+        }
+      });
+
+      // Trigger validation on Enter key
+      $('#username').on('keypress', function (e) {
+        if (e.which === 13) {
+          $('#nameForm').submit();
+        }
+      });
+
+      // Login Form Validation
+      $('#loginForm').on('submit', function(e) {
+        e.preventDefault();
+        
+        let isValid = true;
+        const email = $('#email').val().trim();
+        const password = $('#password').val();
+        
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRegex.test(email)) {
+          $('#emailError').show();
+          isValid = false;
+        } else {
+          $('#emailError').hide();
+        }
+        
+        // Password validation
+        if (!password || password.length < 6) {
+          $('#passwordError').show();
+          isValid = false;
+        } else {
+          $('#passwordError').hide();
+        }
+        
+        if (isValid) {
+          // Simulate login success (in a real app, this would be an AJAX call)
+          $('#loginError').hide();
+          $('#loginSuccess').fadeIn();
+          
+          // Simulate redirect after successful login
+          setTimeout(function() {
+            $('#loginSuccess').text('Login successful! Welcome, ' + email.split('@')[0] + '!');
+          }, 2000);
+        } else {
+          $('#loginSuccess').hide();
+          $('#loginError').fadeIn();
+        }
+      });
+      
+      // Window Event Handlers
+      function logEvent(eventName) {
+        const timestamp = new Date().toLocaleTimeString();
+        $('#eventMessages').prepend(`<p>${timestamp}: ${eventName}</p>`);
+      }
+      
+      // Window focus/blur events
+      $(window).on('focus', function() {
+        logEvent('Window gained focus');
+      });
+      
+      $(window).on('blur', function() {
+        logEvent('Window lost focus');
+      });
+      
+      // Window resize event
+      let resizeTimer;
+      $(window).on('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+          const width = $(window).width();
+          const height = $(window).height();
+          logEvent(`Window resized to ${width}px × ${height}px`);
+        }, 250);
+      });
+      
+      // Window scroll event
+      let scrollTimer;
+      $(window).on('scroll', function() {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(function() {
+          const scrollPos = $(window).scrollTop();
+          logEvent(`Window scrolled to position ${scrollPos}px`);
+        }, 250);
+      });
+      
+      // Document ready event (happens once)
+      logEvent('Document ready');
+      
+      // Window load event (happens once)
+      $(window).on('load', function() {
+        logEvent('Window fully loaded');
+      });
+      
+      // Before unload event
+      $(window).on('beforeunload', function() {
+        logEvent('Window about to unload');
+        // Note: Modern browsers restrict custom messages in beforeunload events
+      });
+    });
+  </script>
+
+</body>
+</html>
