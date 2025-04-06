@@ -31,7 +31,7 @@ Whether you're revising key concepts or exploring new techniques, this repositor
 
 
 1. **Explore Labs**
-   Navigate to any subject folder and follow the individual README for codes.
+   Navigate to any subject folder and explore the given code.
 
 2. **Run Code**
    Run the code on any C++ compiler.
